@@ -29,6 +29,9 @@ function cybersource_edd_process_payment( $purchase_data ) {
 
 	global $edd_options;
 
+	// $edd_options contains an array of all options
+	// $edd_options[ 'cybersource_whatever' ]
+
 	/**********************************
 	 * set transaction mode
 	 **********************************/
@@ -143,12 +146,6 @@ add_action( 'edd_gateway_cybersource_gateway', 'cybersource_edd_process_payment'
 function cybersource_edd_add_settings( $settings ) {
 
 	$cybersource_gateway_settings = array(
-        'cybersource_merchant_id'                => '',
-        'cybersource_live_security_key'                => '',
-        'cybersource_test_security_key'                => '',
-		'cybersource_sale_method'                 => 'auth_capture',
-        'cybersource_sandbox_mode'                => false,
-
 		array(
 			'id' => 'cybersource_gateway_settings',
 			'name' => '<strong>' . __( 'Cybersource Gateway Settings', 'cybersource_edd' ) . '</strong>',
@@ -166,14 +163,14 @@ function cybersource_edd_add_settings( $settings ) {
 			'id' => 'cybersource_live_security_key',
 			'name' => __( 'Live Transaction Security Key', 'cybersource_edd' ),
 			'desc' => __( 'You can find this by logging into your "Live" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'cybersource_edd' ),
-			'type' => 'text',
+			'type' => 'textarea',
 			'size' => 'regular'
 		),
 		array(
 			'id' => 'cybersource_test_security_key',
 			'name' => __( 'Test Transaction Security Key', 'cybersource_edd' ),
 			'desc' => __( 'You can find this by logging into your "Test" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'cybersource_edd' ),
-			'type' => 'text',
+			'type' => 'textarea',
 			'size' => 'regular'
 		),
 		array(
