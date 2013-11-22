@@ -419,7 +419,7 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	$default_address = array(
 		'first-name' => $purchase_data[ 'user_info' ][ 'first_name' ],
 		'last-name' => $purchase_data[ 'user_info' ][ 'last_name' ],
-		'company-name' => '',
+		'company' => '',
 		'address1' => $purchase_data[ 'user_info' ][ 'address' ][ 'line1' ],
 		'address2' => $purchase_data[ 'user_info' ][ 'address' ][ 'line2' ],
 		'city' => $purchase_data[ 'user_info' ][ 'address' ][ 'city' ],
@@ -432,16 +432,21 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 
 	$shipping_address = $default_address; // @todo Handle shipping address integration
 
+	$card_name = explode( ' ', $purchase_data[ 'card_info' ][ 'card_name' ] );
+
+	$card_last_name = array_pop( $card_name );
+	$card_first_name = implode( ' ', $card_name );
+
 	$billing_address = array(
-		'first-name' => $purchase_data[ 'card_info' ][ 'first_name' ],
-		'last-name' => $purchase_data[ 'card_info' ][ 'last_name' ],
-		'company-name' => '',
-		'address1' => $purchase_data[ 'card_info' ][ 'address' ][ 'line1' ],
-		'address2' => $purchase_data[ 'card_info' ][ 'address' ][ 'line2' ],
-		'city' => $purchase_data[ 'card_info' ][ 'address' ][ 'city' ],
-		'state' => $purchase_data[ 'card_info' ][ 'address' ][ 'state' ],
-		'zip' => $purchase_data[ 'card_info' ][ 'address' ][ 'zip' ],
-		'country' => $purchase_data[ 'card_info' ][ 'address' ][ 'country' ],
+		'first-name' => $card_first_name,
+		'last-name' => $card_last_name,
+		'company' => '',
+		'address1' => $purchase_data[ 'card_info' ][ 'card_address' ],
+		'address2' => $purchase_data[ 'card_info' ][ 'card_address_2' ],
+		'city' => $purchase_data[ 'card_info' ][ 'card_city' ],
+		'state' => $purchase_data[ 'card_info' ][ 'card_state' ],
+		'zip' => $purchase_data[ 'card_info' ][ 'card_zip' ],
+		'country' => $purchase_data[ 'card_info' ][ 'card_country' ],
 		'email' => $purchase_data[ 'user_info' ][ 'email' ],
 		'phone' => ''
 	);
