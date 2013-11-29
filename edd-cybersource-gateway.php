@@ -163,7 +163,7 @@ function cybersource_edd_process_payment( $purchase_data ) {
 		if ( 0 < $payment_id ) {
 			try {
 				// Make payment with Cybersource Gateway
-				$transaction_id = cybersource_edd_do_payment( $purchase_data, $payment_data, $payment_id );
+				$transaction_id = cybersource_edd_do_payment( $purchase_data, $payment_id );
 
 				// once a transaction is successful, set the purchase to complete
 				edd_update_payment_status( $payment_id, 'complete' );
@@ -192,7 +192,7 @@ function cybersource_edd_process_payment( $purchase_data ) {
 		$fail = true; // errors were detected
 	}
 
-	if ( !edd_get_errors() || !$fail ) {
+	if ( edd_get_errors() || $fail ) {
 		// if errors are present, send the user back to the purchase page so they can be corrected
 		edd_send_back_to_checkout( '?payment-mode=' . $purchase_data[ 'post_data' ][ 'edd-gateway' ] );
 	}
@@ -491,7 +491,7 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	// @todo support shipping address and other shipping information?
 
 	$request->card = (object) array(
-		'accountNumber' => $purchase_data[ 'card_info' ][ 'card_name' ],
+		'accountNumber' => $purchase_data[ 'card_info' ][ 'card_number' ],
 		'expirationMonth' => $expiration[ 'month' ],
 		'expirationYear' => $expiration[ 'year' ],
 		'cvNumber' => $purchase_data[ 'card_info' ][ 'card_cvc' ]
@@ -530,28 +530,16 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	$request->clientLibraryVersion = phpversion();
 	$request->clientEnvironment = php_uname();
 
-	/*ob_start();
-	echo '<pre>';
-	var_dump( $request );
-	echo '</pre>';
-	error_log( ob_get_clean() );*/
-
 	// Setup client
 	require_once 'soap.cybersource.php';
 
-	$cybersource_soap = new CyberSource_SoapClient( $url );
+	$cybersource_soap = new CyberSource_SoapClient( $url, array( 'connection_timeout' => 30 ) );
 
 	// Set credentials
 	$cybersource_soap->set_credentials( $edd_options[ 'cybersource_merchant_id' ], $security_key );
 
 	// Make request
 	$response = $cybersource_soap->runTransaction( $request );
-
-	/*ob_start();
-	echo '<pre>';
-	var_dump( $response );
-	echo '</pre>';
-	error_log( ob_get_clean() );*/
 
 	$status = strtolower( $response->decision );
 
@@ -562,10 +550,10 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	// Payment under review
 	elseif ( 'review' == $status ) {
 		if ( 230 == $response->reasonCode ) {
-			$messages = __( "The authorization request was approved by the issuing bank but declined by our merchant because it did not pass the CVN check.", 'LION' );
+			$messages = __( "The authorization request was approved by the issuing bank but declined by our merchant because it did not pass the CVN check.", 'cybersource_edd' );
 		}
 		else {
-			$messages = __( "This order is being placed on hold for review. You may contact the store to complete the transaction.", 'LION' );
+			$messages = __( "This order is being placed on hold for review. You may contact the store to complete the transaction.", 'cybersource_edd' );
 		}
 
 		throw new Exception( $messages );
@@ -573,37 +561,37 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 
 	// 'failure' and other statuses
 	if ( 202 == $response->reasonCode ) {
-		$messages = __( 'The provided card is expired, please use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'The provided card is expired, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 203 == $response->reasonCode ) {
-		$messages = __( 'The provided card was declined, please use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'The provided card was declined, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 204 == $response->reasonCode ) {
-		$messages = __( 'Insufficient funds in account, please use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'Insufficient funds in account, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 208 == $response->reasonCode ) {
-		$messages = __( 'The card is inactivate or not authorized for card-not-present transactions, please use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'The card is inactivate or not authorized for card-not-present transactions, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 210 == $response->reasonCode ) {
-		$messages = __( 'The credit limit for the card has been reached, please use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'The credit limit for the card has been reached, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 211 == $response->reasonCode ) {
-		$messages = __( 'The card verification number is invalid, please try again.', 'LION' );
+		$messages = __( 'The card verification number is invalid, please try again.', 'cybersource_edd' );
 	}
 	elseif ( 231 == $response->reasonCode ) {
-		$messages = __( 'The provided card number was invalid, or card type was incorrect. Please try again.', 'LION' );
+		$messages = __( 'The provided card number was invalid. Please try again.', 'cybersource_edd' );
 	}
 	elseif ( 232 == $response->reasonCode ) {
-		$messages = __( 'That card type is not accepted, please use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'That card type is not accepted, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 240 == $response->reasonCode ) {
-		$messages = __( 'The card type is invalid or does not correlate with the credit card number. Please try again or use an alternate card or other form of payment.', 'LION' );
+		$messages = __( 'The card type is invalid or does not correlate with the credit card number. Please try again or use an alternate card or other form of payment.', 'cybersource_edd' );
 	}
 	elseif ( 'ERROR' == $response->decision ) {
-		$messages = __( 'An error occurred, please try again or try an alternate form of payment', 'LION' );
+		$messages = __( 'An error occurred, please try again or try an alternate form of payment', 'cybersource_edd' );
 	}
 	else {
-		$messages = __( 'We cannot process your order with the payment information that you provided. Please use a different payment account or an alternate payment method.', 'LION' );
+		$messages = __( 'We cannot process your order with the payment information that you provided. Please use a different payment account or an alternate payment method.', 'cybersource_edd' );
 	}
 
 	throw new Exception( $messages );
