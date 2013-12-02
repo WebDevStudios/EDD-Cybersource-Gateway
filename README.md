@@ -1,4 +1,4 @@
-EDD-Cybersource-Gateway
+EDD-CyberSource-Gateway
 =======================
 
-Easy Digital Downloads Cybersource Gateway AddOn
+Easy Digital Downloads CyberSource Gateway AddOn

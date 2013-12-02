@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Easy Digital Downloads - Cybersource Gateway
+Plugin Name: Easy Digital Downloads - CyberSource Gateway
 Plugin URL: http://easydigitaldownloads.com/extension/cybersource-gateway
-Description: Cybersource Payment Gateway for Easy Digital Downloads
+Description: CyberSource Payment Gateway for Easy Digital Downloads
 Version: 1.0
 Author: WebDevStudios
 Author URI: http://webdevstudios.com/
@@ -15,10 +15,10 @@ if( !class_exists( 'EDD_License' ) ) {
 }
 
 // Instantiate the licensing / updater. Must be placed in the main plugin file
-$license = new EDD_License( __FILE__, 'Cybersource Gateway', '1.0', 'WebDevStudios' );
+$license = new EDD_License( __FILE__, 'CyberSource Gateway', '1.0', 'WebDevStudios' );
 
 /**
- * Register Cybersource Gateway textdomain
+ * Register CyberSource Gateway textdomain
  *
  * @since 1.0
  */
@@ -30,7 +30,7 @@ function cybersource_edd_load_textdomain() {
 add_action( 'plugins_loaded', 'cybersource_edd_load_textdomain' );
 
 /**
- * Register Cybersource Gateway
+ * Register CyberSource Gateway
  *
  * @param array $gateways EDD Gateway configuration array
  *
@@ -41,8 +41,8 @@ add_action( 'plugins_loaded', 'cybersource_edd_load_textdomain' );
 function cybersource_edd_register_gateway( $gateways ) {
 
 	$gateways[ 'cybersource_gateway' ] = array(
-		'admin_label' => 'Cybersource Gateway',
-		'checkout_label' => __( 'Cybersource Gateway', 'cybersource_edd' )
+		'admin_label' => 'CyberSource Gateway',
+		'checkout_label' => __( 'CyberSource Gateway', 'cybersource_edd' )
 	);
 
 	return $gateways;
@@ -51,7 +51,7 @@ function cybersource_edd_register_gateway( $gateways ) {
 add_filter( 'edd_payment_gateways', 'cybersource_edd_register_gateway' );
 
 /**
- * Add Cybersource Gateway settings
+ * Add CyberSource Gateway settings
  *
  * @param array $edd_options EDD Settings
  *
@@ -62,7 +62,7 @@ function cybersource_edd_add_settings( $edd_options ) {
 	$cybersource_gateway_settings = array(
 		array(
 			'id' => 'cybersource_gateway_settings',
-			'name' => '<strong>' . __( 'Cybersource Gateway Settings', 'cybersource_edd' ) . '</strong>',
+			'name' => '<strong>' . __( 'CyberSource Gateway Settings', 'cybersource_edd' ) . '</strong>',
 			'desc' => __( 'Configure the gateway settings', 'cybersource_edd' ),
 			'type' => 'header'
 		),
@@ -108,7 +108,7 @@ function cybersource_edd_add_settings( $edd_options ) {
 add_filter( 'edd_settings_gateways', 'cybersource_edd_add_settings' );
 
 /**
- * Process payments for Cybersource Gateway
+ * Process payments for CyberSource Gateway
  *
  * @param array $purchase_data EDD purchase data
  *
@@ -162,7 +162,7 @@ function cybersource_edd_process_payment( $purchase_data ) {
 
 		if ( 0 < $payment_id ) {
 			try {
-				// Make payment with Cybersource Gateway
+				// Make payment with CyberSource Gateway
 				$transaction_id = cybersource_edd_do_payment( $purchase_data, $payment_id );
 
 				// once a transaction is successful, set the purchase to complete
@@ -175,7 +175,7 @@ function cybersource_edd_process_payment( $purchase_data ) {
 				edd_send_to_success_page();
 			}
 			catch ( Exception $e ) {
-				// Error sent back from Cybersource Gateway
+				// Error sent back from CyberSource Gateway
 				edd_set_error( 'cybersource_error', $e->getMessage() );
 
 				$fail = true;
@@ -201,13 +201,13 @@ function cybersource_edd_process_payment( $purchase_data ) {
 add_action( 'edd_gateway_cybersource_gateway', 'cybersource_edd_process_payment' );
 
 /**
- * Make Payment through Cybersource Gateway
+ * Make Payment through CyberSource Gateway
  *
  * @param array $purchase_data EDD purchase data
  *
  * @throws Exception
  *
- * @return int Cybersource Transaction ID
+ * @return int CyberSource Transaction ID
  *
  * @since 1.0
  */
