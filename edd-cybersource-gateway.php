@@ -3,7 +3,7 @@
 Plugin Name: Easy Digital Downloads - CyberSource Gateway
 Plugin URL: http://easydigitaldownloads.com/extension/cybersource-gateway
 Description: CyberSource Payment Gateway for Easy Digital Downloads
-Version: 1.0
+Version: 1.0.0
 Author: WebDevStudios
 Author URI: http://webdevstudios.com/
 Contributors: webdevstudios, sc0ttkclark
@@ -20,7 +20,7 @@ $license = new EDD_License( __FILE__, 'CyberSource Gateway', '1.0', 'WebDevStudi
 /**
  * Register CyberSource Gateway textdomain
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_load_textdomain() {
 
@@ -134,7 +134,7 @@ add_filter( 'edd_settings_gateways', 'cybersource_edd_add_settings' );
  *
  * @param array $purchase_data EDD purchase data
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_process_payment( $purchase_data ) {
 
@@ -231,7 +231,7 @@ add_action( 'edd_gateway_cybersource_gateway', 'cybersource_edd_process_payment'
  *
  * @return int CyberSource Transaction ID
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 
@@ -627,7 +627,7 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
  *
  * @return array
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_get_card_types() {
 
@@ -691,7 +691,7 @@ function cybersource_edd_get_card_types() {
  *
  * @return bool
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_get_card_type( $number ) {
 
@@ -732,7 +732,7 @@ function cybersource_edd_get_card_type( $number ) {
  *
  * @return bool
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_matches_card_type( $number, $card ) {
 
@@ -769,7 +769,7 @@ function cybersource_edd_matches_card_type( $number, $card ) {
  *
  * @return bool
  *
- * @since 1.0
+ * @since 1.0.0
  */
 function cybersource_edd_is_valid_card_checksum( $number ) {
 
