@@ -51,6 +51,22 @@ function cybersource_edd_register_gateway( $gateways ) {
 add_filter( 'edd_payment_gateways', 'cybersource_edd_register_gateway' );
 
 /**
+ * Register the Cybersource gateway subsection.
+ *
+ * @since  1.1.0
+ *
+ * @param  array $gateway_sections Current Gateway Tab subsections.
+ * @return array Gateway subsections with Cybersource.
+ */
+function cybersource_edd_register_gateway_tab( $gateway_sections ) {
+	$gateway_sections['cybersource_gateway'] = __( 'CyberSource Gateway', 'cybersource_edd' );
+
+	return $gateway_sections;
+}
+
+add_filter( 'edd_settings_sections_gateways', 'cybersource_edd_register_gateway_tab', 1, 1 );
+
+/**
  * Add CyberSource Gateway settings
  *
  * @param array $edd_options EDD Settings
