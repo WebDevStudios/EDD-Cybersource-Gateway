@@ -116,6 +116,12 @@ function cybersource_edd_add_settings( $edd_options ) {
 		)
 	);
 
+	// If EDD is at version 2.5 or later...
+	if ( version_compare( EDD_VERSION, 2.5, '>=' ) ) {
+		// Use the previously noted array key as an array key again and next your settings
+		$cybersource_gateway_settings = array( 'cybersource_gateway' => $cybersource_gateway_settings );
+	}
+
 	$edd_options = array_merge( $edd_options, $cybersource_gateway_settings );
 
 	return $edd_options;
