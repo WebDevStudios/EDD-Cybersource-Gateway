@@ -1,0 +1,23 @@
+{
+  "name": "edd-cybersource-gateway",
+  "version": "1.1.0",
+  "description": "Easy Digital Downloads - CyberSource Gateway",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tw2113@github.com/WebDevStudios/EDD-Cybersource-Gateway.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebDevStudios/EDD-Cybersource-Gateway/issues"
+  },
+  "homepage": "https://github.com/WebDevStudios/EDD-Cybersource-Gateway#readme",
+  "dependencies": {
+    "wdsppf": "git+https://tw2113@github.com/WebDevStudios/WDS-Product-Plugin-Framework.git"
+  },
+  "devDependencies": {}
+}
