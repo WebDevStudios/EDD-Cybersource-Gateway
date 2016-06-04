@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/WebDevStudios/EDD-Cybersource-Gateway#readme",
   "dependencies": {
-    "wdsppf": "git+https://tw2113@github.com/WebDevStudios/WDS-Product-Plugin-Framework.git"
+    "wdsppf": "git+ssh://git@github.com/WebDevStudios/WDS-Product-Plugin-Framework.git"
   },
   "devDependencies": {}
 }
