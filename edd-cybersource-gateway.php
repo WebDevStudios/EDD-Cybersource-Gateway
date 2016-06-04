@@ -358,7 +358,7 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 		$request->item = $items;
 	}
 
-	$request->clientLibrary        = "PHP";
+	$request->clientLibrary        = 'PHP';
 	$request->clientLibraryVersion = phpversion();
 	$request->clientEnvironment    = php_uname();
 
