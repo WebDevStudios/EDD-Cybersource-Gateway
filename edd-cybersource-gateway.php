@@ -9,14 +9,6 @@ Author URI: http://webdevstudios.com/
 Contributors: webdevstudios
 */
 
-// Load the EDD license handler only if not already loaded. Must be placed in the main plugin file
-if ( ! class_exists( 'EDD_License' ) ) {
-	include( dirname( __FILE__ ) . '/includes/EDD_License_Handler.php' );
-}
-
-// Instantiate the licensing / updater. Must be placed in the main plugin file
-$license = new EDD_License( __FILE__, 'CyberSource Gateway', '1.0', 'WebDevStudios' );
-
 /**
  * Register CyberSource Gateway textdomain.
  *
