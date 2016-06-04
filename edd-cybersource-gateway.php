@@ -131,10 +131,6 @@ function cybersource_edd_process_payment( $purchase_data ) {
 
 	global $edd_options;
 
-	/**********************************
-	 * check for errors here
-	 **********************************/
-
 	/*
 	// Errors can be set like this.
 	if( ! isset($_POST['card_number'] ) ) {
@@ -150,10 +146,6 @@ function cybersource_edd_process_payment( $purchase_data ) {
 
 	if ( ! $errors ) {
 		$purchase_summary = edd_get_purchase_summary( $purchase_data );
-
-		/****************************************
-		 * setup the payment details to be stored
-		 ****************************************/
 
 		$payment_data = array(
 			'price'        => $purchase_data['price'],
@@ -190,7 +182,7 @@ function cybersource_edd_process_payment( $purchase_data ) {
 				$fail = true;
 			}
 		} else {
-			// Payment not saved
+			// Payment not saved.
 			edd_set_error( 'cybersource_payment', __( 'Unable to save order, please contact customer service.', 'cybersource_edd' ) );
 
 			$fail = true;
@@ -212,9 +204,10 @@ add_action( 'edd_gateway_cybersource_gateway', 'cybersource_edd_process_payment'
  *
  * @since 1.0.0
  *
- * @throws Exception
+ * @throws Exception Empty card type.
  *
  * @param array $purchase_data EDD purchase data.
+ * @param int   $payment_id    Payment ID.
  * @return int CyberSource Transaction ID.
  */
 function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
@@ -223,10 +216,6 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 
 	// $edd_options contains an array of all options
 	// $edd_options[ 'cybersource_whatever' ]
-
-	/**********************************
-	 * set transaction mode
-	 **********************************/
 
 	$url = 'https://ics2ws.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.26.wsdl';
 	$security_key = $edd_options['cybersource_live_security_key'];
@@ -465,10 +454,10 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	$request->merchantID            = $edd_options['cybersource_merchant_id'];
 	$request->merchantReferenceCode = $purchase_data['purchase_key'];
 
-	// Authorize
+	// Authorize.
 	$request->ccAuthService = (object) array( 'run' => 'true' );
 
-	// Capture
+	// Capture.
 	if ( 'Sale' == $paymentaction ) {
 		$request->ccCaptureService = (object) array( 'run' => 'true' );
 	}
@@ -489,7 +478,6 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	);
 
 	// @todo support shipping address and other shipping information?
-
 	$request->card = (object) array(
 		'accountNumber'   => $purchase_data['card_info']['card_number'],
 		'expirationMonth' => $expiration['month'],
@@ -511,7 +499,6 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 		// @todo Handle taxes? $product[ 'tax' ]
 		// @todo Product name? $product[ 'name' ]
 		// @todo Product ID? $product[ 'id' ]
-
 		$items[] = (object) array(
 			'id'        => $item_count,
 			'unitPrice' => $price,
@@ -529,23 +516,23 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	$request->clientLibraryVersion = phpversion();
 	$request->clientEnvironment    = php_uname();
 
-	// Setup client
+	// Setup client.
 	require_once 'soap.cybersource.php';
 
 	$cybersource_soap = new CyberSource_SoapClient( $url, array( 'connection_timeout' => 30 ) );
 
-	// Set credentials
+	// Set credentials.
 	$cybersource_soap->set_credentials( $edd_options['cybersource_merchant_id'], $security_key );
 
-	// Make request
+	// Make request.
 	$response = $cybersource_soap->runTransaction( $request );
 
 	$status = strtolower( $response->decision );
 
-	// Success
+	// Success.
 	if ( 'accept' == $status ) {
 		return $response->requestID;
-	} elseif ( 'review' == $status ) { // Payment under review
+	} elseif ( 'review' == $status ) { // Payment under review.
 		if ( 230 == $response->reasonCode ) {
 			$messages = esc_html__( 'The authorization request was approved by the issuing bank but declined by our merchant because it did not pass the CVN check.', 'cybersource_edd' );
 		} else {
@@ -555,7 +542,7 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 		throw new Exception( $messages );
 	}
 
-	// 'failure' and other statuses
+	// 'failure' and other statuses.
 	if ( 202 == $response->reasonCode ) {
 		$messages = esc_html__( 'The provided card is expired, please use an alternate card or other form of payment.', 'cybersource_edd' );
 	} elseif ( 203 == $response->reasonCode ) {
@@ -589,9 +576,9 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
  *
  * Props to Gravity Forms / Rocket Genius for the logic
  *
- * @return array
- *
  * @since 1.0.0
+ *
+ * @return array
  */
 function cybersource_edd_get_card_types() {
 
@@ -652,7 +639,7 @@ function cybersource_edd_get_card_types() {
  *
  * @since 1.0.0
  *
- * @param int|string $number
+ * @param int|string $number Card number.
  * @return bool
  */
 function cybersource_edd_get_card_type( $number ) {
@@ -691,8 +678,8 @@ function cybersource_edd_get_card_type( $number ) {
  *
  * @since 1.0.0
  *
- * @param int $number
- * @param array $card
+ * @param int   $number Card number.
+ * @param array $card   Card data.
  * @return bool
  */
 function cybersource_edd_matches_card_type( $number, $card ) {
@@ -728,7 +715,7 @@ function cybersource_edd_matches_card_type( $number, $card ) {
  *
  * @since 1.0.0
  *
- * @param int $number
+ * @param int $number Card.
  * @return bool
  */
 function cybersource_edd_is_valid_card_checksum( $number ) {
