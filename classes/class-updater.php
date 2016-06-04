@@ -1,6 +1,7 @@
 <?php
 /**
  * EDD Cybersource Gateway Updater Class File
+ *
  * @package    EDDCybersourceGateway
  * @subpackage EDDCybersourceGatewayUpdater
  * @author     WebDevStudios
