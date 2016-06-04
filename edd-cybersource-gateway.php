@@ -33,7 +33,7 @@ function cybersource_edd_register_gateway( $gateways ) {
 
 	$gateways['cybersource_gateway'] = array(
 		'admin_label' => 'CyberSource Gateway',
-		'checkout_label' => __( 'CyberSource Gateway', 'cybersource_edd' ),
+		'checkout_label' => esc_attr__( 'CyberSource Gateway', 'cybersource_edd' ),
 	);
 
 	return $gateways;
@@ -50,7 +50,7 @@ add_filter( 'edd_payment_gateways', 'cybersource_edd_register_gateway' );
  * @return array Gateway subsections with Cybersource.
  */
 function cybersource_edd_register_gateway_tab( $gateway_sections ) {
-	$gateway_sections['cybersource_gateway'] = __( 'CyberSource Gateway', 'cybersource_edd' );
+	$gateway_sections['cybersource_gateway'] = esc_html__( 'CyberSource Gateway', 'cybersource_edd' );
 
 	return $gateway_sections;
 }
@@ -69,39 +69,39 @@ function cybersource_edd_add_settings( $edd_options ) {
 	$cybersource_gateway_settings = array(
 		array(
 			'id' => 'cybersource_gateway_settings',
-			'name' => '<strong>' . __( 'CyberSource Gateway Settings', 'cybersource_edd' ) . '</strong>',
-			'desc' => __( 'Configure the gateway settings', 'cybersource_edd' ),
+			'name' => '<strong>' . esc_html__( 'CyberSource Gateway Settings', 'cybersource_edd' ) . '</strong>',
+			'desc' => esc_html__( 'Configure the gateway settings', 'cybersource_edd' ),
 			'type' => 'header',
 		),
 		array(
 			'id' => 'cybersource_merchant_id',
-			'name' => __( 'Merchant ID', 'cybersource_edd' ),
-			'desc' => __( 'This is the same merchant ID you use to log into the CyberSource Business Center.', 'cybersource_edd' ),
+			'name' => esc_html__( 'Merchant ID', 'cybersource_edd' ),
+			'desc' => esc_html__( 'This is the same merchant ID you use to log into the CyberSource Business Center.', 'cybersource_edd' ),
 			'type' => 'text',
 			'size' => 'regular',
 		),
 		array(
 			'id' => 'cybersource_live_security_key',
-			'name' => __( 'Live Transaction Security Key', 'cybersource_edd' ),
-			'desc' => __( 'You can find this by logging into your "Live" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'cybersource_edd' ),
+			'name' => esc_html__( 'Live Transaction Security Key', 'cybersource_edd' ),
+			'desc' => esc_html__( 'You can find this by logging into your "Live" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'cybersource_edd' ),
 			'type' => 'textarea',
 			'size' => 'regular',
 		),
 		array(
 			'id' => 'cybersource_test_security_key',
-			'name' => __( 'Test Transaction Security Key', 'cybersource_edd' ),
-			'desc' => __( 'You can find this by logging into your "Test" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'cybersource_edd' ),
+			'name' => esc_html__( 'Test Transaction Security Key', 'cybersource_edd' ),
+			'desc' => esc_html__( 'You can find this by logging into your "Test" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'cybersource_edd' ),
 			'type' => 'textarea',
 			'size' => 'regular',
 		),
 		array(
 			'id' => 'cybersource_sale_method',
-			'name' => __( 'Transaction Sale Method', 'cybersource_edd' ),
-			'desc' => __( '', 'cybersource_edd' ),
+			'name' => esc_html__( 'Transaction Sale Method', 'cybersource_edd' ),
+			'desc' => esc_html__( '', 'cybersource_edd' ),
 			'type' => 'select',
 			'options' => array(
-				'auth_capture' => __( 'Authorize and Capture - Charge the Credit Card for the total amount', 'cybersource_edd' ),
-				'auth' => __( 'Authorize - Only authorize the Credit Card for the total amount', 'cybersource_edd' ),
+				'auth_capture' => esc_html__( 'Authorize and Capture - Charge the Credit Card for the total amount', 'cybersource_edd' ),
+				'auth' => esc_html__( 'Authorize - Only authorize the Credit Card for the total amount', 'cybersource_edd' ),
 			),
 			'std' => 'auth_capture',
 		),
