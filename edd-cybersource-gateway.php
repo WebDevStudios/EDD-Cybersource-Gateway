@@ -304,7 +304,7 @@ function cybersource_edd_do_payment( $purchase_data, $payment_id ) {
 	$request->ccAuthService = (object) array( 'run' => 'true' );
 
 	// Capture.
-	if ( 'Sale' == $paymentaction ) {
+	if ( 'Sale' === $paymentaction ) {
 		$request->ccCaptureService = (object) array( 'run' => 'true' );
 	}
 
