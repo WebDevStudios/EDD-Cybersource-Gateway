@@ -394,7 +394,7 @@ if ( ! class_exists( 'Pluginize_Product_License_menu' ) ) {
 				if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || false === stristr( WP_ACCESSIBLE_HOSTS, $host ) ) {
 					?>
 					<div class="error">
-						<p><?php printf( esc_html__( "Warning! You're blocking external requests which means you won't be able to get %s updates. Please add %s to %s.", 'cptuiext' ), esc_html( $this->plugin->product_id ), '<strong>' . esc_html( $host ) . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
+						<p><?php printf( esc_html__( "Warning! You're blocking external requests which means you won't be able to get %s updates. Please add %s to %s.", 'pluginize_updater' ), esc_html( $this->plugin->product_id ), '<strong>' . esc_html( $host ) . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
 					</div>
 					<?php
 				}
