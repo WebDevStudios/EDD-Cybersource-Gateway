@@ -42,11 +42,11 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 		$details['plugin_name']           = plugin_basename( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/plugin-file.php';
 		$details['menu_page']             = array(
 			'parent_slug'    => 'edit.php?post_type=download',
-			'page_title'     => esc_html__( 'EDD CyberSource Gateway License', 'edd-product-support' ),
-			'menu_title'     => esc_html__( 'EDD CyberSource Gateway License', 'edd-product-support' ),
-			'menu_slug'      => 'abc',
-			'management_tab' => esc_html__( 'License Management', 'edd-product-support' ),
-			'button_text'    => esc_attr__( 'Save Changes', 'edd-product-support' ),
+			'page_title'     => esc_html__( 'EDD CyberSource Gateway License', 'cybersource_edd' ),
+			'menu_title'     => esc_html__( 'EDD CyberSource Gateway License', 'cybersource_edd' ),
+			'menu_slug'      => 'pluginize-edd-cybersource-license',
+			'management_tab' => esc_html__( 'License Management', 'cybersource_edd' ),
+			'button_text'    => esc_attr__( 'Save Changes', 'cybersource_edd' ),
 		);
 		$details['option_group']          = 'pluginize';
 		$details['option_name']           = 'pluginize_edd_cybersource_settings';
