@@ -18,6 +18,8 @@ function cybersource_edd_load_textdomain() {
 
 	load_plugin_textdomain( 'cybersource_edd', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
+	require_once( dirname( __FILE__ ) ) . '/vendor/pluginize-updater/updater.php';
+
 }
 add_action( 'plugins_loaded', 'cybersource_edd_load_textdomain' );
 
