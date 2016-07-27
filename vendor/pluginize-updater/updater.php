@@ -28,8 +28,8 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 		// All values are demo.
 		// Should probably get its own method.
 		// Will need to be changed to match value provided below.
-		$pluginize_options                = get_option( 'pluginize_edd_settings', array() );
-		$instance                         = get_option( 'pluginize_edd_instance', '' );
+		$pluginize_options                = get_option( 'pluginize_edd_cybersource_settings', array() );
+		$instance                         = get_option( 'pluginize_edd_cybersource_instance', '' );
 		$details['email']                 = ( ! empty( $pluginize_options['pluginize_email'] ) ) ? $pluginize_options['pluginize_email'] : '';
 		$details['license_key']           = ( ! empty( $pluginize_options['pluginize_api_key'] ) ) ? $pluginize_options['pluginize_api_key'] : '';
 		$details['product_id']            = 'EDD CyberSource Gateway';
