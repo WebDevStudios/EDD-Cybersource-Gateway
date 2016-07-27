@@ -39,7 +39,7 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 		$details['software_version']      = '1.0.0';
 		$details['upgrade_url']           = 'http://pluginize.com/';
 		$details['changelog_restapi_url'] = '';
-		$details['plugin_name']           = plugin_basename( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/plugin-file.php';
+		$details['plugin_name']           = plugin_basename( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/edd-cybersource-gateway.php';
 		$details['menu_page']             = array(
 			'parent_slug'    => 'edit.php?post_type=download',
 			'page_title'     => esc_html__( 'EDD CyberSource Gateway License', 'cybersource_edd' ),
