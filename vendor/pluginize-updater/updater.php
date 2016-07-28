@@ -24,6 +24,11 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 	 * @since 1.0.0
 	 */
 	function pluginize_plugin_edd_cybersource_gateway() {
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return;
+		}
+
 		// Needs to fetch saved values from options.
 		// All values are demo.
 		// Should probably get its own method.
