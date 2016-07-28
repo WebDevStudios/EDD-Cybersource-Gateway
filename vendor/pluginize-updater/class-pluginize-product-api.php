@@ -460,6 +460,7 @@ if ( ! class_exists( 'Pluginize_Product_API' ) ) {
 		private function get_error_messages() {
 			$messages = array();
 
+			$messages['no_activation']          = sprintf( __( '%s has not been activated. Go to the settings page and enter the license key and license email to activate it.', 'pluginize_updater' ), $this->plugin->product_id );
 			$messages['no_key']                 = sprintf( __( 'A license key for %s could not be found. Maybe you forgot to enter a license key when setting up, or the key was deactivated in your account. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a>.', 'pluginize_updater' ), $this->plugin->product_id, $this->plugin->upgrade_url );
 			$messages['no_subscription']        = sprintf( __( 'A subscription for %s could not be found. You can purchase a subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'pluginize_updater' ), $this->plugin->product_id, $this->plugin->upgrade_url );
 			$messages['exp_license']            = sprintf( __( 'The license key for %s has expired. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a>.', 'pluginize_updater' ), $this->plugin->product_id, $this->plugin->upgrade_url );
@@ -504,6 +505,7 @@ if ( ! class_exists( 'Pluginize_Product_API' ) ) {
 		public function get_error_codes() {
 			return array(
 				'no_key',
+				'no_activation',
 				'no_subscription',
 				'exp_license',
 				'on_hold',
