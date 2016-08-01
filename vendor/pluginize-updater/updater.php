@@ -29,6 +29,10 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 			return;
 		}
 
+		// Won't double add, if existing already.
+		add_option( 'pluginize_edd_cybersource_settings', array() );
+		add_option( 'pluginize_edd_cybersource_instance', '' );
+
 		// Needs to fetch saved values from options.
 		// All values are demo.
 		// Should probably get its own method.
