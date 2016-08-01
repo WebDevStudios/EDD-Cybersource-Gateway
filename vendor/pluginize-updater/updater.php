@@ -45,7 +45,7 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 		$details['product_slug']          = 'EDD-CyberSource-Gateway';
 		$details['platform']              = str_ireplace( array( 'http://', 'https://' ), '', home_url() );
 		$details['instance']              = $instance;
-		$details['software_version']      = '1.0.0';
+		$details['software_version']      = EDDCYBERSOURCEVERSION;
 		$details['upgrade_url']           = 'http://pluginize.com/';
 		$details['changelog_restapi_url'] = '';
 		$details['plugin_name']           = plugin_basename( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/edd-cybersource-gateway.php';
