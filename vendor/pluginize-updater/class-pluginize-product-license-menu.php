@@ -301,7 +301,7 @@ if ( ! class_exists( 'Pluginize_Product_License_menu' ) ) {
 					$activate_result = $this->api_object->activate( $new_values['pluginize_api_key'], $new_values['pluginize_email'] );
 				}
 
-				if ( is_object( $activate_result ) && ! empty( $activate_result->statuses )) {
+				if ( is_object( $activate_result ) && ! empty( $activate_result->statuses ) ) {
 					$error = true;
 					$key = $activate_result->statuses[1];
 					$error_message = $activate_result->statuses[2];
