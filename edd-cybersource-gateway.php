@@ -9,6 +9,8 @@ Author URI: http://webdevstudios.com/
 Contributors: webdevstudios
 */
 
+define( 'EDDCYBERSOURCEVERSION', '1.0.0' );
+
 /**
  * Register CyberSource Gateway textdomain.
  *
