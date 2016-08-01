@@ -60,7 +60,7 @@ if ( ! function_exists( 'pluginize_plugin_edd_cybersource_gateway' ) ) {
 		$details['option_group']          = 'pluginize';
 		$details['option_name']           = 'pluginize_edd_cybersource_settings';
 		$details['instance_name']         = 'pluginize_edd_cybersource_instance';
-		$details['api_errors_key']        = 'pluginize_api_key_errors';
+		$details['api_errors_key']        = 'pluginize_edd_cybersource_api_key_errors';
 
 		$product = new Pluginize_Product( $details );
 
