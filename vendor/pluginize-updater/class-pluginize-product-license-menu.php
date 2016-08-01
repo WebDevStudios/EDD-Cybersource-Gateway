@@ -278,6 +278,10 @@ if ( ! class_exists( 'Pluginize_Product_License_menu' ) ) {
 		 */
 		public function validate_license_settings( $saved_values = array() ) {
 
+			if ( is_null( $saved_values ) ) {
+				return $this->options;
+			}
+
 			$new_values      = array();
 			$options         = $this->options;
 			$error           = false;
