@@ -165,7 +165,7 @@ function pluginize_edd_cybersource_activate_license() {
 					break;
 
 				case 'item_name_mismatch' :
-					$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'cybersource_edd' ), cptui_extended()->plugin_name );
+					$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'cybersource_edd' ), 'EDD CyberSource Gateway' );
 					break;
 
 				case 'no_activations_left':
