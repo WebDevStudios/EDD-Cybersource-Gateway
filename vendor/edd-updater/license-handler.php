@@ -6,10 +6,6 @@
  * @package CPTUIExtended.
  */
 
-if ( ! defined( 'PLUGINIZE_STORE_URL' ) ) {
-	define( 'PLUGINIZE_STORE_URL', 'http://pluginize.staging.wpengine.com' );
-}
-
 /**
  * Add our menu item.
  *
@@ -259,7 +255,7 @@ function pluginize_edd_cybersource_activate_deactivate( $action = 'activate_lice
 		'url'        => home_url()
 	);
 
-	return wp_remote_post( PLUGINIZE_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+	return wp_remote_post( cybersource_edd_store_url(), array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 }
 
 /**

@@ -597,12 +597,16 @@ function cybersource_edd_is_valid_card_checksum( $number ) {
 
 }
 
+function cybersource_edd_store_url() {
+	return 'http://pluginize.com';
+}
+
 function cybersource_edd_check_updates() {
 	if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
 		require_once dirname( __FILE__ ) . 'vendor/edd-updater/EDD_SL_Plugin_Updater.php';
 	}
 	$license_key = trim( get_option( 'pluginize_edd_cybersource_license_key' ) );
-	$edd_updater = new EDD_SL_Plugin_Updater( PLUGINIZE_STORE_URL, __FILE__, array(
+	$edd_updater = new EDD_SL_Plugin_Updater( cybersource_edd_store_url(), __FILE__, array(
 		'version'   => EDDCYBERSOURCEVERSION,     // Current version number.
 		'license'   => $license_key,       // license key (used get_option above to retrieve from DB)
 		'item_name' => 'EDD CyberSource Gateway', // name of this plugin
