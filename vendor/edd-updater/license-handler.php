@@ -6,6 +6,8 @@
  * @package CPTUIExtended.
  */
 
+define( 'PLUGINIZE_LICENSE_PAGE_CYBERSOURCE', 'pluginize_edd_cybersource_license_page' );
+
 /**
  * Add our menu item.
  *
@@ -176,7 +178,7 @@ function pluginize_edd_cybersource_activate_license() {
 	}
 
 	if ( ! empty( $message ) ) {
-		$base_url = admin_url( 'admin.php?page=' . PLUGINIZE_LICENSE_PAGE );
+		$base_url = admin_url( 'edit.php?post_type=download&page=' . PLUGINIZE_LICENSE_PAGE_CYBERSOURCE );
 		$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
 
 		wp_redirect( $redirect );
@@ -184,7 +186,7 @@ function pluginize_edd_cybersource_activate_license() {
 	}
 
 	update_option( 'pluginize_edd_cybersource_license_status', $license_data->license );
-	wp_redirect( admin_url( 'admin.php?page=' . PLUGINIZE_LICENSE_PAGE ) );
+	wp_redirect( admin_url( 'edit.php?post_type=download&page=' . PLUGINIZE_LICENSE_PAGE_CYBERSOURCE ) );
 	exit();
 }
 add_action( 'admin_init', 'pluginize_edd_cybersource_activate_license' );
@@ -215,7 +217,7 @@ function pluginize_edd_cybersource_deactivate_license() {
 			$message = __( 'An error occurred, please try again.', 'cybersource_edd' );
 		}
 
-		$base_url = admin_url( 'plugins.php?page=' . PLUGINIZE_LICENSE_PAGE );
+		$base_url = admin_url( 'plugins.php?page=' . PLUGINIZE_LICENSE_PAGE_CYBERSOURCE );
 		$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
 
 		wp_redirect( $redirect );
@@ -230,7 +232,7 @@ function pluginize_edd_cybersource_deactivate_license() {
 		delete_option( 'pluginize_edd_cybersource_license_status' );
 	}
 
-	wp_redirect( admin_url( 'admin.php?page=' . PLUGINIZE_LICENSE_PAGE ) );
+	wp_redirect( admin_url( 'edit.php?post_type=download&page=' . PLUGINIZE_LICENSE_PAGE_CYBERSOURCE ) );
 	exit();
 }
 add_action( 'admin_init', 'pluginize_edd_cybersource_deactivate_license' );
