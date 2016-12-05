@@ -56,9 +56,9 @@ function pluginize_edd_cybersource_license_page() {
 							<td>
 								<?php wp_nonce_field( 'pluginize_edd_cybersource_license_nonce', 'pluginize_edd_cybersource_license_nonce' ); ?>
 								<?php if ( $active ) { ?>
-									<input type="submit" class="button-secondary" name="edd_license_deactivate" value="<?php esc_attr_e( 'Deactivate License', 'cybersource_edd' ); ?>"/>
+									<input type="submit" class="button-secondary" name="edd_cybersource_license_deactivate" value="<?php esc_attr_e( 'Deactivate License', 'cybersource_edd' ); ?>"/>
 								<?php } else { ?>
-									<input type="submit" class="button-secondary" name="edd_license_activate" value="<?php esc_attr_e( 'Activate License', 'cybersource_edd' ); ?>"/>
+									<input type="submit" class="button-secondary" name="edd_cybersource_license_activate" value="<?php esc_attr_e( 'Activate License', 'cybersource_edd' ); ?>"/>
 								<?php } ?>
 							</td>
 						</tr>
@@ -115,7 +115,7 @@ function pluginize_edd_cybersource_sanitize_license( $new ) {
  */
 function pluginize_edd_cybersource_activate_license() {
 
-	if ( empty( $_POST ) || ! isset( $_POST['edd_license_activate'] ) ) {
+	if ( empty( $_POST ) || ! isset( $_POST['edd_cybersource_license_activate'] ) ) {
 		return;
 	}
 
@@ -198,7 +198,7 @@ add_action( 'admin_init', 'pluginize_edd_cybersource_activate_license' );
  */
 function pluginize_edd_cybersource_deactivate_license() {
 
-	if ( empty( $_POST ) || ! isset( $_POST['edd_license_deactivate'] ) ) {
+	if ( empty( $_POST ) || ! isset( $_POST['edd_cybersource_license_deactivate'] ) ) {
 		return;
 	}
 
