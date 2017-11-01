@@ -603,7 +603,7 @@ function cybersource_edd_store_url() {
 
 function cybersource_edd_check_updates() {
 	if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
-		require_once dirname( __FILE__ ) . 'vendor/edd-updater/EDD_SL_Plugin_Updater.php';
+		require_once dirname( __FILE__ ) . '/vendor/edd-updater/EDD_SL_Plugin_Updater.php';
 	}
 	$license_key = trim( get_option( 'pluginize_edd_cybersource_license_key' ) );
 	$edd_updater = new EDD_SL_Plugin_Updater( cybersource_edd_store_url(), __FILE__, array(
